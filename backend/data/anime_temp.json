@@ -1,0 +1,164 @@
+{
+  "anime": [
+    {
+      "id": 101,
+      "title": "Demon Slayer",
+      "category": "anime",
+      "genre": [
+        "Action",
+        "Fantasy"
+      ],
+      "rating": 9.2,
+      "year": 2019,
+      "videoUrl": "https://www.youtube.com/embed/wPFeBxt7VXI",
+      "description": "A family is attacked by demons and only two members survive.",
+      "image": "./img/anime/anime_101.jpg",
+      "status": "Ongoing",
+      "featured": true
+    },
+    {
+      "id": 102,
+      "title": "Attack on Titan",
+      "category": "anime",
+      "genre": [
+        "Action",
+        "Drama"
+      ],
+      "rating": 9.5,
+      "year": 2013,
+      "videoUrl": "https://www.youtube.com/embed/iHZv1rHy3zw",
+      "description": "Humanity fights for survival against man-eating giants.",
+      "image": "./img/anime/anime_102.jpg",
+      "status": "Completed",
+      "featured": true
+    },
+    {
+      "id": 103,
+      "title": "One Piece",
+      "category": "anime",
+      "genre": [
+        "Adventure",
+        "Comedy"
+      ],
+      "rating": 9,
+      "year": 1999,
+      "videoUrl": "https://www.youtube.com/embed/1KMcoJBMWE4",
+      "description": "Monkey D. Luffy sets off to find the ultimate treasure.",
+      "image": "./img/anime/anime_103.jpg",
+      "status": "Ongoing",
+      "featured": true
+    },
+    {
+      "id": 104,
+      "title": "Jujutsu Kaisen",
+      "category": "anime",
+      "genre": [
+        "Action",
+        "Supernatural"
+      ],
+      "rating": 8.8,
+      "year": 2020,
+      "videoUrl": "https://www.youtube.com/embed/MPfZhgLiK6w",
+      "description": "A boy swallows a cursed talisman and becomes a curse himself.",
+      "image": "./img/anime/anime_104.jpg",
+      "status": "Ongoing",
+      "featured": true
+    },
+    {
+      "id": 105,
+      "title": "Naruto",
+      "category": "anime",
+      "genre": [
+        "Action",
+        "Adventure"
+      ],
+      "rating": 8.5,
+      "year": 2002,
+      "videoUrl": "https://www.youtube.com/embed/-G9BqkgZXRA",
+      "description": "A young ninja seeks recognition and dreams of becoming the Hokage.",
+      "image": "./img/anime/anime_105.jpg",
+      "status": "Completed",
+      "featured": false
+    },
+    {
+      "id": 106,
+      "title": "Dragon Ball Z",
+      "category": "anime",
+      "genre": [
+        "Action",
+        "Sci-Fi"
+      ],
+      "rating": 8.9,
+      "year": 1989,
+      "videoUrl": "https://www.youtube.com/embed/2p2w7-yGUbk",
+      "description": "Goku defends Earth against an assortment of villains.",
+      "image": "./img/anime/anime_106.png",
+      "status": "Completed",
+      "featured": false
+    },
+    {
+      "id": 107,
+      "title": "Death Note",
+      "category": "anime",
+      "genre": [
+        "Thriller",
+        "Mystery"
+      ],
+      "rating": 9.4,
+      "year": 2006,
+      "videoUrl": "https://www.youtube.com/embed/NlJZ-YgAt-c",
+      "description": "A high school student discovers a notebook that can kill anyone.",
+      "image": "./img/anime/anime_107.png",
+      "status": "Completed",
+      "featured": false
+    },
+    {
+      "id": 108,
+      "title": "Tokyo Ghoul",
+      "category": "anime",
+      "genre": [
+        "Action",
+        "Horror"
+      ],
+      "rating": 8.3,
+      "year": 2014,
+      "videoUrl": "https://www.youtube.com/embed/vGuQeQsoRgU",
+      "description": "A college student survives an encounter with a ghoul.",
+      "image": "./img/anime/anime_108.jpg",
+      "status": "Completed",
+      "featured": false
+    },
+    {
+      "id": 109,
+      "title": "Bleach",
+      "category": "anime",
+      "genre": [
+        "Action",
+        "Supernatural"
+      ],
+      "rating": 8.4,
+      "year": 2004,
+      "videoUrl": "https://www.youtube.com/embed/7vRsRdUGqqI",
+      "description": "A teenager obtains the powers of a Soul Reaper.",
+      "image": "./img/anime/anime_109.jpg",
+      "status": "Ongoing",
+      "featured": false
+    },
+    {
+      "id": 110,
+      "title": "Sword Art Online",
+      "category": "anime",
+      "genre": [
+        "Action",
+        "Sci-Fi"
+      ],
+      "rating": 8,
+      "year": 2012,
+      "videoUrl": "https://www.youtube.com/embed/6ohYX4GMI7g",
+      "description": "Players are trapped in a virtual reality MMORPG.",
+      "image": "./img/anime/anime_110.jpg",
+      "status": "Completed",
+      "featured": false
+    }
+  ]
+}

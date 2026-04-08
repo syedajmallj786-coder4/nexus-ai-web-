@@ -1,0 +1,52 @@
+{
+  "301": {
+    "title": "Elden Ring",
+    "url": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/library_600x900_2x.jpg",
+    "notes": "Steam Library Art - Official"
+  },
+  "302": {
+    "title": "God of War Ragnarok",
+    "url": "https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/aqNTqdBkm1NmduaZUGraGQn8.png",
+    "notes": "PS Store CDN - Official"
+  },
+  "303": {
+    "title": "Cyberpunk 2077",
+    "url": "https://steamcdn-a.akamaihd.net/steam/apps/1091500/library_600x900_2x.jpg",
+    "notes": "Steam Library Art - Official"
+  },
+  "304": {
+    "title": "GTA VI",
+    "url": "https://media.rockstargames.com/rockstargames-newsite/img/global/downloads/13357_gta6-vertical-2160x3840.jpg",
+    "notes": "Rockstar Games Official Key Art"
+  },
+  "305": {
+    "title": "The Last of Us Part II",
+    "url": "https://image.api.playstation.com/vulcan/ap/rnd/202005/2821/Cq26m76FfNREmJ8n20P8LlzV.png",
+    "notes": "PS Store CDN - Official"
+  },
+  "306": {
+    "title": "Minecraft",
+    "url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2lbd.jpg",
+    "notes": "IGDB - Verified Minecraft Cover"
+  },
+  "307": {
+    "title": "Valorant",
+    "url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2mdf.jpg",
+    "notes": "IGDB - Verified Valorant Cover"
+  },
+  "308": {
+    "title": "FIFA 25 (EA FC 25)",
+    "url": "https://steamcdn-a.akamaihd.net/steam/apps/2577300/library_600x900_2x.jpg",
+    "notes": "Steam Library Art - Official"
+  },
+  "309": {
+    "title": "Call of Duty",
+    "url": "https://steamcdn-a.akamaihd.net/steam/apps/1938090/library_600x900_2x.jpg",
+    "notes": "Steam Library Art - Official"
+  },
+  "310": {
+    "title": "Fortnite",
+    "url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2lb7.jpg",
+    "notes": "IGDB - Verified Fortnite Cover"
+  }
+}

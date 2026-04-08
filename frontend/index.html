@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NEXUS REALM - The Ultimate Entertainment Streaming Platform for Anime, Movies, and Games.">
+    <meta property="og:title" content="NEXUS REALM">
+    <title>NEXUS REALM | Home</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="dark-mode">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <h1 class="glitch-text" data-text="NEXUS REALM">NEXUS REALM</h1>
+    </div>
+
+    <!-- Background Effects -->
+    <canvas id="starfield"></canvas>
+    <div id="sakura-container"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar glass-panel">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="neon-text">NEXUS</span> REALM
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li>
+                    <div class="search-box">
+                        <input type="text" id="globalSearch" placeholder="Search...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </li>
+                <li><a href="login.html" class="btn-login neon-border">Login</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Global Search Results Overlays -->
+    <div id="searchResultsOverlay" class="search-overlay glass-panel hidden">
+        <div class="search-results-header">
+            <h3>Search Results</h3>
+            <button id="closeSearchBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="searchResultsGrid" class="content-grid small-grid"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <video autoplay muted loop playsinline class="hero-video">
+            <!-- Using a reliable abstract background video -->
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-cyberpunk-city-street-during-the-night-42416-large.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content fade-up">
+            <h1 class="hero-title">ENTER THE <span class="neon-text">NEXUS</span></h1>
+            <p class="hero-subtitle">Unlimited Anime, Movies, and Games in one realm.</p>
+            <div class="hero-buttons">
+                <a href="#explore" class="btn primary-btn pulse-glow">Explore Now</a>
+                <a href="#trending" class="btn secondary-btn glass-btn">View Trending</a>
+            </div>
+            
+            <!-- Animated Counters -->
+            <div class="stats-container">
+                <div class="stat-item glass-panel">
+                    <span class="counter neon-cyan" data-target="500">0</span>+
+                    <p>Anime</p>
+                </div>
+                <div class="stat-item glass-panel">
+                    <span class="counter neon-purple" data-target="1000">0</span>+
+                    <p>Movies</p>
+                </div>
+                <div class="stat-item glass-panel">
+                    <span class="counter neon-pink" data-target="300">0</span>+
+                    <p>Games</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="explore">
+        <!-- Featured Carousel (Placeholder structure) -->
+        <section class="featured-section section-padding">
+            <h2 class="section-title"><span class="neon-text">Featured</span> Highlights</h2>
+            <div class="carousel-container glass-panel">
+                <div class="carousel-track" id="featuredCarousel">
+                    <!-- Javascript will inject featured slides here -->
+                </div>
+                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </section>
+
+        <!-- Category Previews -->
+        <section class="previews-section section-padding" id="trending">
+            <!-- Anime Preview -->
+            <div class="category-preview fade-up">
+                <div class="category-header">
+                    <h2>Trending <span class="neon-purple">Anime</span></h2>
+                    <a href="anime.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="content-grid" id="animePreviewGrid">
+                    <!-- JS will populate -->
+                </div>
+            </div>
+
+            <!-- Movies Preview -->
+            <div class="category-preview fade-up mt-5">
+                <div class="category-header">
+                    <h2>Top <span class="neon-cyan">Movies</span></h2>
+                    <a href="movies.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="content-grid" id="moviesPreviewGrid">
+                    <!-- JS will populate -->
+                </div>
+            </div>
+
+            <!-- AI Pulse Discovery -->
+            <div class="ai-pulse-section fade-up mt-5">
+                <div class="pulse-container glass-panel neon-border">
+                    <div class="pulse-header">
+                        <h2><i class="fas fa-microchip"></i> AI <span class="neon-cyan">PULSE</span> DISCOVERY</h2>
+                        <p>Our neural networks have identified a 100% match for your profile.</p>
+                    </div>
+                    <div class="pulse-content" id="aiPulseContent">
+                        <div class="pulse-loader">
+                            <div class="scanner-line"></div>
+                            <p>Scanning Neural Pathways...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Games Preview -->
+            <div class="category-preview fade-up mt-5">
+                <div class="category-header">
+                    <h2>Hot <span class="neon-pink">Games</span></h2>
+                    <a href="games.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="content-grid" id="gamesPreviewGrid">
+                    <!-- JS will populate -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section section-padding fade-up">
+            <div class="newsletter-box glass-panel neon-border">
+                <h2>Join the <span class="neon-text">Realm</span></h2>
+                <p>Subscribe for weekly updates on new releases!</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn primary-btn pulse-glow">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top glass-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="glass-panel mt-5">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2><span class="neon-text">NEXUS</span> REALM</h2>
+                <p>The cyberpunk gateway to entertainment.</p>
+            </div>
+            <div class="footer-links-col">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="games.html">Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NEXUS REALM. All rights reserved.</p>
+            <p class="watermark">Made by Antigravity AI for [YOUR NAME] as a Professional Portfolio Project</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/effects.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/ai-features.js"></script>
+</body>
+</html>

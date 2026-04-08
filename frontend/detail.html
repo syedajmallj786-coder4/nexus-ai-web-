@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS REALM | Details</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="dark-mode">
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <canvas id="starfield"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar glass-panel" style="background: rgba(10, 10, 15, 0.9);">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="neon-text">NEXUS</span> REALM</a>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li>
+                    <div class="search-box">
+                        <input type="text" id="globalSearch" placeholder="Search...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </li>
+                <li><a href="login.html" class="btn-login neon-border">Login</a></li>
+                <li><button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div id="searchResultsOverlay" class="search-overlay glass-panel hidden">
+        <div class="search-results-header">
+            <h3>Search Results</h3>
+            <button id="closeSearchBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="searchResultsGrid" class="content-grid small-grid"></div>
+    </div>
+
+    <!-- Detail Hero Section -->
+    <div id="detailHero" class="hero" style="height: 60vh;">
+        <div class="hero-overlay" style="background: linear-gradient(to top, var(--bg-dark) 10%, rgba(0,0,0,0.7));"></div>
+        <img id="detailHeroBg" src="" alt="Background" class="hero-video" style="object-fit: cover; filter: blur(10px) brightness(0.4);">
+        
+        <div class="hero-content fade-up" style="display: flex; gap: 2rem; align-items: flex-end; max-width: 1200px; width: 100%; margin: 0 auto; text-align: left; padding-top: 100px;">
+            <img id="detailPoster" src="" alt="Poster" style="width: 250px; border-radius: 12px; box-shadow: 0 0 30px rgba(139,92,246,0.5); object-fit: cover;">
+            
+            <div style="flex-grow: 1;">
+                <h1 id="detailTitle" class="hero-title" style="font-size: 3rem; margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(255,255,255,0.5);">Loading...</h1>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center;">
+                    <span id="detailYear" style="color: var(--neon-cyan); font-weight: bold;"></span>
+                    <span id="detailRating"><i class="fas fa-star" style="color:gold;"></i> <span></span></span>
+                    <span id="detailDuration" style="color: var(--text-muted);"><i class="far fa-clock"></i> <span></span></span>
+                    <span id="detailStatus" class="badge badge-new" style="display:none;"></span>
+                </div>
+                <div id="detailGenres" style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem;"></div>
+                
+                <p id="detailDesc" style="font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2rem; line-height: 1.8;"></p>
+                
+                <div class="action-buttons" style="display: flex; gap: 1rem;">
+                    <button class="btn primary-btn pulse-glow" id="playMovieBtn"><i class="fas fa-play"></i> Watch Trailer</button>
+                    <button id="detailWatchlistBtn" class="btn glass-btn"><i class="far fa-heart"></i> Add to Watchlist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="section-padding">
+        <!-- Video Player -->
+        <section id="trailerSection" class="fade-up" style="margin-bottom: 5rem; display: none;">
+            <h2 class="section-title">Now <span class="neon-purple">Playing</span></h2>
+            <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 0 auto; border-radius: 12px; border: 1px solid var(--neon-cyan); box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);">
+                <iframe id="moviePlayer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Related Content -->
+        <section class="fade-up">
+            <h2 class="section-title">Related <span class="neon-cyan">Content</span></h2>
+            <div class="content-grid" id="relatedGrid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+    </main>
+
+    <button id="backToTop" class="back-to-top glass-btn"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="js/main.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/ai-features.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            const type = urlParams.get('type') || 'anime';
+
+            if(!id) {
+                document.getElementById('detailTitle').innerText = 'Item Not Found';
+                return;
+            }
+
+            fetch(`${API_URL}/${type}/${id}`)
+                .then(res => {
+                    if(!res.ok) throw new Error('Not found');
+                    return res.json();
+                })
+                .then(data => {
+                    const imgSrc = data.image ? data.image : `https://placehold.co/300x450/8b5cf6/ffffff?text=${encodeURIComponent(data.title)}`;
+                    
+                    document.title = `NEXUS REALM | ${data.title}`;
+                    document.getElementById('detailHeroBg').src = imgSrc;
+                    document.getElementById('detailPoster').src = imgSrc;
+                    document.getElementById('detailTitle').innerText = data.title;
+                    document.getElementById('detailYear').innerText = data.year || '';
+                    document.querySelector('#detailRating span').innerText = data.rating || 'N/A';
+                    
+                    const durationEl = document.getElementById('detailDuration');
+                    if(data.duration) {
+                        durationEl.querySelector('span').innerText = data.duration;
+                        durationEl.style.display = 'inline-block';
+                    } else {
+                        durationEl.style.display = 'none';
+                    }
+
+                    document.getElementById('detailDesc').innerText = data.description;
+                    
+                    if(data.status) {
+                        const sEl = document.getElementById('detailStatus');
+                        sEl.innerText = data.status;
+                        sEl.style.display = 'inline-block';
+                    }
+
+                    // Handle Video Player Loading (Lazy load to fix lag)
+                    const trailerSection = document.getElementById('trailerSection');
+                    const moviePlayer = document.getElementById('moviePlayer');
+                    const playBtn = document.getElementById('playMovieBtn');
+
+                    if(data.videoUrl) {
+                        playBtn.onclick = () => {
+                            trailerSection.style.display = 'block';
+                            // Only set src once (check if already loaded)
+                            const currentSrc = moviePlayer.getAttribute('src');
+                            if (!currentSrc || currentSrc === '' || currentSrc === 'about:blank') {
+                                // Append autoplay correctly depending on existing query params
+                                const separator = data.videoUrl.includes('?') ? '&' : '?';
+                                moviePlayer.src = data.videoUrl + separator + "autoplay=1&rel=0";
+                            }
+                            trailerSection.scrollIntoView({behavior:'smooth'});
+                        };
+                    } else {
+                        trailerSection.style.display = 'none';
+                        playBtn.style.display = 'none';
+                    }
+
+                    const genresContainer = document.getElementById('detailGenres');
+                    if(data.genre) {
+                        data.genre.forEach(g => {
+                            genresContainer.innerHTML += `<span class="genre-tag" style="font-size:0.9rem; padding:0.3rem 0.8rem;">${g}</span>`;
+                        });
+                    }
+
+                    // Setup Watchlist Button
+                    const wlBtn = document.getElementById('detailWatchlistBtn');
+                    const wlIcon = wlBtn.querySelector('i');
+                    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || {};
+                    if(watchlist[data.id]) {
+                        wlBtn.classList.add('saved');
+                        wlIcon.classList.replace('far', 'fas');
+                        wlBtn.innerHTML = `<i class="fas fa-heart"></i> Saved to Watchlist`;
+                    }
+                    
+                    wlBtn.onclick = () => {
+                        window.toggleWatchlist({ currentTarget: wlBtn, stopPropagation: ()=>{} }, data.id, data.title, data.category);
+                        if(wlBtn.classList.contains('saved')) {
+                            wlBtn.innerHTML = `<i class="fas fa-heart"></i> Saved to Watchlist`;
+                        } else {
+                            wlBtn.innerHTML = `<i class="far fa-heart"></i> Add to Watchlist`;
+                        }
+                    };
+
+                    // Load Related (just load same category and exclude current)
+                    fetch(`${API_URL}/${type}`)
+                        .then(r => r.json())
+                        .then(allItems => {
+                            const related = allItems.filter(i => i.id !== data.id).slice(0, 4);
+                            const grid = document.getElementById('relatedGrid');
+                            renderCards(related, grid);
+                        });
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('detailTitle').innerText = 'Item Not Found';
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS REALM | Anime</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="dark-mode">
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <canvas id="starfield"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar glass-panel" style="background: rgba(10, 10, 15, 0.9);">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="neon-text">NEXUS</span> REALM</a>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="anime.html" style="color:var(--neon-cyan)">Anime</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li>
+                    <div class="search-box">
+                        <input type="text" id="globalSearch" placeholder="Search...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </li>
+                <li><a href="login.html" class="btn-login neon-border">Login</a></li>
+                <li><button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div id="searchResultsOverlay" class="search-overlay glass-panel hidden">
+        <div class="search-results-header">
+            <h3>Search Results</h3>
+            <button id="closeSearchBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="searchResultsGrid" class="content-grid small-grid"></div>
+    </div>
+
+    <main class="section-padding" style="padding-top: 120px;">
+        <h1 class="section-title fade-up">Explore <span class="neon-purple">Anime</span></h1>
+
+        <!-- Filters -->
+        <div class="filters-container glass-panel fade-up" style="padding: 1rem; margin-bottom: 2rem; border-radius: 8px; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <input type="text" id="animeSearch" placeholder="Filter by title..." style="flex-grow:1; padding: 0.5rem; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; border-radius: 4px;">
+            <select id="genreFilter" style="padding: 0.5rem; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; border-radius: 4px;">
+                <option value="">All Genres</option>
+                <option value="Action">Action</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Drama">Drama</option>
+                <option value="Comedy">Comedy</option>
+            </select>
+            <select id="statusFilter" style="padding: 0.5rem; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; border-radius: 4px;">
+                <option value="">All Statuses</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Completed">Completed</option>
+            </select>
+            <select id="yearFilter" style="padding: 0.5rem; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: white; border-radius: 4px;">
+                <option value="">All Years</option>
+                <option value="2020s">2020s</option>
+                <option value="2010s">2010s</option>
+                <option value="Older">Older</option>
+            </select>
+        </div>
+
+        <div class="content-grid fade-up" id="animeGrid">
+            <!-- Populated by JS -->
+        </div>
+    </main>
+
+    <button id="backToTop" class="back-to-top glass-btn"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="js/main.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/ai-features.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let allAnime = [];
+            const grid = document.getElementById('animeGrid');
+            const searchInput = document.getElementById('animeSearch');
+            const genreFilter = document.getElementById('genreFilter');
+            const statusFilter = document.getElementById('statusFilter');
+            const yearFilter = document.getElementById('yearFilter');
+
+            fetch(`${API_URL}/anime`)
+                .then(res => res.json())
+                .then(data => {
+                    allAnime = data;
+                    renderCards(data, grid);
+                });
+
+            function filterAnime() {
+                const query = searchInput.value.toLowerCase();
+                const genre = genreFilter.value;
+                const status = statusFilter.value;
+                const yearCat = yearFilter.value;
+
+                const filtered = allAnime.filter(a => {
+                    const matchQuery = a.title.toLowerCase().includes(query);
+                    const matchGenre = genre ? a.genre.includes(genre) : true;
+                    const matchStatus = status ? a.status === status : true;
+                    let matchYear = true;
+                    if(yearCat === '2020s') matchYear = a.year >= 2020;
+                    else if(yearCat === '2010s') matchYear = a.year >= 2010 && a.year < 2020;
+                    else if(yearCat === 'Older') matchYear = a.year < 2010;
+
+                    return matchQuery && matchGenre && matchStatus && matchYear;
+                });
+                renderCards(filtered, grid);
+            }
+
+            searchInput.addEventListener('input', filterAnime);
+            genreFilter.addEventListener('change', filterAnime);
+            statusFilter.addEventListener('change', filterAnime);
+            yearFilter.addEventListener('change', filterAnime);
+        });
+    </script>
+</body>
+</html>
